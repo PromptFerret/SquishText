@@ -39,7 +39,7 @@ A single self-contained HTML file (`index.html`) that compresses text into a sha
 
 ### Text Blob (Copy button output)
 ```
-[SquishText] To decode, base64-decode the string below then inflate (deflate-raw). Or paste at https://promptferret.github.io/tools/squishtext/
+[SquishText] To decode, base64-decode the string below then inflate (deflate-raw). Or paste at https://promptferret.github.io/SquishText/
 rVdtb9y4Ef6uX...abcd1234
 ```
 - Header line: human-readable + LLM decode instructions (an LLM with code execution can decode it on sight)
@@ -47,7 +47,7 @@ rVdtb9y4Ef6uX...abcd1234
 
 ### Share Link (Link button output)
 ```
-https://promptferret.github.io/tools/squishtext/#rVdtb9y4Ef6uX...abcd1234
+https://promptferret.github.io/SquishText/#rVdtb9y4Ef6uX...abcd1234
 ```
 - URL-safe base64 in the hash fragment: `+` → `-`, `/` → `_`, trailing `=` stripped
 - CRC32 checksum included after `.` separator
