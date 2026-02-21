@@ -26,7 +26,7 @@ The header is informational only — stripping it doesn't affect decompression. 
 
 - Share a full D&D character sheet as a single pasteable blob
 - Compress session notes, item lists, or build guides for sharing
-- Pack markdown output from the [GSheet Character Exporter](https://promptferret.github.io/GSheetCharacterExporter/) into a compact format
+- Pack markdown output from the [GSheetCharacterExporter](https://promptferret.github.io/GSheetCharacterExporter/) into a compact format
 - Light obfuscation (not encryption) — text isn't casually readable
 - Link sharing — payload in URL hash, auto-decodes on open
 
