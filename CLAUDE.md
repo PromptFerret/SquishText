@@ -1,7 +1,11 @@
 # SquishText
 
+## Text Rules
+
+**ASCII only for punctuation.** Never use em dashes (`U+2014`), en dashes (`U+2013`), curly/smart double quotes (`U+201C`, `U+201D`), or curly/smart single quotes (`U+2018`, `U+2019`). Use the plain keyboard equivalents: `-`, `"`, `'`. This applies to all files - code, documentation, comments, strings, and markup.
+
 ## What This Is
-A single self-contained HTML file (`index.html`) that compresses text into a shareable encoded string, and decompresses it back. No server, no accounts, no dependencies — the compressed data IS the payload.
+A single self-contained HTML file (`index.html`) that compresses text into a shareable encoded string, and decompresses it back. No server, no accounts, no dependencies - the compressed data IS the payload.
 
 ## How It Works
 
@@ -22,10 +26,10 @@ A single self-contained HTML file (`index.html`) that compresses text into a sha
 6. **Output**: original text, byte-for-byte identical
 
 ### Why This Approach
-- **DeflateRaw** (not gzip): smaller output — no gzip header/footer overhead
-- **Base64**: universally pasteable — works in Discord, chat, email, text files, anywhere that accepts plain text
+- **DeflateRaw** (not gzip): smaller output - no gzip header/footer overhead
+- **Base64**: universally pasteable - works in Discord, chat, email, text files, anywhere that accepts plain text
 - **CompressionStream API**: built into all modern browsers (Chrome 80+, Firefox 113+, Safari 16.4+), zero JS library dependencies
-- **CRC32 checksum**: detects single-character corruption — deflate has zero error tolerance, so a clear error message beats a cryptic decompression failure
+- **CRC32 checksum**: detects single-character corruption - deflate has zero error tolerance, so a clear error message beats a cryptic decompression failure
 - **Trade-off**: base64 adds ~33% overhead, so net compression on typical English text is ~35-50% smaller. Highly repetitive text (tables, lists, structured data) compresses much better.
 
 ## Use Cases
@@ -33,7 +37,7 @@ A single self-contained HTML file (`index.html`) that compresses text into a sha
 - Compress any structured text (session notes, item lists, build guides) for sharing
 - Pack markdown output from the GSheet exporter into a compact shareable format
 - Encode text so it's not casually readable (light obfuscation, not encryption)
-- Share via link — payload embedded in URL hash, auto-decodes on open
+- Share via link - payload embedded in URL hash, auto-decodes on open
 
 ## Payload Format
 
@@ -51,12 +55,12 @@ https://promptferret.github.io/SquishText/#rVdtb9y4Ef6uX...abcd1234
 ```
 - URL-safe base64 in the hash fragment: `+` → `-`, `/` → `_`, trailing `=` stripped
 - CRC32 checksum included after `.` separator
-- Hash fragment never hits the server — purely client-side
+- Hash fragment never hits the server - purely client-side
 - Page auto-unsquishes on load if hash is present
 
 ### Backward Compatibility
 - Payloads without a checksum suffix decompress normally (no verification)
-- Header line is stripped automatically — paste with or without it
+- Header line is stripped automatically - paste with or without it
 - URL-safe and standard base64 both accepted (auto-converted)
 
 ## UI Design
@@ -72,7 +76,7 @@ Two-pane layout (input left, output right) matching the PromptFerret tools dark 
 - **Open**: load any file into the input pane (read as text; no file type filter)
 - **Clear**: reset everything
 
-No mode toggle — both action buttons are always visible. Paste text and pick which one you want.
+No mode toggle - both action buttons are always visible. Paste text and pick which one you want.
 
 ### Pane Headers
 Each pane has a header label with Save and Copy buttons (appear when content is available):
@@ -87,9 +91,9 @@ After compression/decompression, show:
 - Visual indicator: green if smaller, yellow if similar, red if larger
 
 ### Error Handling
-- Invalid base64: "Invalid input — not a valid base64 string"
-- CRC32 mismatch: "Checksum failed — this payload has been corrupted or modified"
-- Decompression failure: "Decompression failed — this doesn't appear to be a SquishText payload"
+- Invalid base64: "Invalid input - not a valid base64 string"
+- CRC32 mismatch: "Checksum failed - this payload has been corrupted or modified"
+- Decompression failure: "Decompression failed - this doesn't appear to be a SquishText payload"
 - Empty input: action buttons disabled
 - No CompressionStream: show browser upgrade message
 
@@ -103,8 +107,8 @@ Standard lookup-table CRC32 computed over the base64 string (before URL-safe con
 
 ### Browser Compatibility
 - `CompressionStream` / `DecompressionStream` require modern browsers (Chrome 80+, Firefox 113+, Safari 16.4+)
-- No polyfill — if the API isn't available, show a message suggesting a modern browser
-- Works from `file://` — no fetch calls needed
+- No polyfill - if the API isn't available, show a message suggesting a modern browser
+- Works from `file://` - no fetch calls needed
 
 ### URL Length Limits
 | Browser | Practical URL length |
@@ -113,15 +117,15 @@ Standard lookup-table CRC32 computed over the base64 string (before URL-safe con
 | Firefox | ~65,000 chars |
 | Safari | ~80,000 chars |
 
-Typical character sheets compress to 2,000–6,000 chars — well within all limits.
+Typical character sheets compress to 2,000-6,000 chars - well within all limits.
 
 ## Development Philosophy
 
 ### Keep It Simple
 - Single HTML file, no build step, no external dependencies
 - Same dark theme as the rest of PromptFerret tools
-- Must work when served via HTTP (GitHub Pages) — same CORS-friendly approach
+- Must work when served via HTTP (GitHub Pages) - same CORS-friendly approach
 - File:// should also work for this tool (no fetch calls needed)
 
 ### Prefer Local Execution Over Agent Processing
-When testing or debugging, write and run a local script rather than doing it manually in conversation. The user's machine is Windows — use Python or Node, not bash.
+When testing or debugging, write and run a local script rather than doing it manually in conversation. The user's machine is Windows - use Python or Node, not bash.
