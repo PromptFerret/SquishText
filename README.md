@@ -3,6 +3,7 @@
 Compress text into a shareable encoded string, and decompress it back. No server, no accounts, no dependencies - the compressed data IS the payload. Runs entirely in your browser.
 
 **Live:** [promptferret.github.io/SquishText](https://promptferret.github.io/SquishText/)
+**Discord:** [Join our Discord](https://discord.gg/xed4bCazym) for support, discussion, and additional resources.
 
 ## What It Does
 
